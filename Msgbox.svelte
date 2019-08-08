@@ -17,9 +17,7 @@
       "--mb-colordark10",
       LightenDarkenColor(color, -10)
     );
-     document.documentElement.style.setProperty(
-      "--mb-color", color
-    );
+    document.documentElement.style.setProperty("--mb-color", color);
     document.documentElement.style.setProperty(
       "--mb-colorlight10",
       LightenDarkenColor(color, 10)
@@ -28,8 +26,7 @@
       "--mb-colorlight20",
       LightenDarkenColor(color, 20)
     );
-  }
-  else{
+  } else {
     document.documentElement.style.setProperty("--mb-colordark20", "#666");
     document.documentElement.style.setProperty("--mb-colordark10", "#777");
     document.documentElement.style.setProperty("--mb-color", "#999");
@@ -301,7 +298,7 @@
     border-radius: 15px;
     color: var(--mb-colorwhite);
     padding: 15px;
-    border: solid var(--mb-colorlight10) 1px;
+    border: solid var(--mb-color) 1px;
     margin-bottom: 5px;
   }
 
