@@ -27,20 +27,18 @@ msgbox.OkCancel("Is this Ok?", "Confirm",
 );
 
 // single line input box 
-msgbox.Input(
+msgbox.InputLine(
  "initial value",
  "Enter a string",
  "place holder message",
- false,
  val => { console.log(val);}
 );
 
 // multi line textbox input
-msgbox.Input(
+msgbox.InputBox(
  "initial value",
  "Enter something",
  "place holder message",
- true,
  val => { console.log(val);}
 );
 ```
