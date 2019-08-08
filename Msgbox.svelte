@@ -11,20 +11,20 @@
     // console.log(color);
     document.documentElement.style.setProperty(
       "--mb-colordark20",
-      LightenDarkenColor(color, -30)
+      LightenDarkenColor(color, -66)
     );
     document.documentElement.style.setProperty(
       "--mb-colordark10",
-      LightenDarkenColor(color, -10)
+      LightenDarkenColor(color, -33)
     );
     document.documentElement.style.setProperty("--mb-color", color);
     document.documentElement.style.setProperty(
       "--mb-colorlight10",
-      LightenDarkenColor(color, 10)
+      LightenDarkenColor(color, 33)
     );
     document.documentElement.style.setProperty(
       "--mb-colorlight20",
-      LightenDarkenColor(color, 20)
+      LightenDarkenColor(color, 66)
     );
   } else {
     document.documentElement.style.setProperty("--mb-colordark20", "#666");
@@ -181,23 +181,26 @@
       usePound = true;
     }
 
+    amt = 1 + amt / 100;
+
     var num = parseInt(col, 16);
 
-    var r = (num >> 16) + amt;
+    var r = (num >> 16) * amt;
 
     if (r > 255) r = 255;
     else if (r < 0) r = 0;
 
-    var b = ((num >> 8) & 0x00ff) + amt;
+    var b = ((num >> 8) & 0x00ff) * amt;
 
     if (b > 255) b = 255;
     else if (b < 0) b = 0;
 
-    var g = (num & 0x0000ff) + amt;
+    var g = (num & 0x0000ff) * amt;
 
     if (g > 255) g = 255;
     else if (g < 0) g = 0;
 
+  console.log(r,g,b);
     return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
   }
 </script>
@@ -286,7 +289,7 @@
     bottom: 0;
   }
 
-  .actionbutton {
+  button {
     min-width: 100px;
     font-size: large;
     background: var(--mb-color);
@@ -302,7 +305,7 @@
     margin-bottom: 5px;
   }
 
-  .actionbutton:hover {
+  button:hover {
     background-image: linear-gradient(
       to bottom,
       var(--mb-colorlight20),
@@ -313,7 +316,8 @@
 
   .outline {
     background: var(--mb-colorwhite);
-    color: var(--mb-colordark20);
+    /* color: var(--mb-colordark20); */
+    color: #666;
   }
   .outline:hover {
     background-image: linear-gradient(
@@ -321,6 +325,7 @@
       var(--mb-colorwhite),
       var(--mb-colorlight10)
     );
+    color: var(--mb-colorwhite);
     box-shadow: none;
   }
 </style>
@@ -356,14 +361,10 @@
         <slot name="footer">
           {#if showok}
             <div class="ok">
-              <!-- <Button mode="success" on:click={okclick}>{txtok}</Button> -->
-              <button class="actionbutton" on:click={okclick}>{txtok}</button>
+              <button on:click={okclick}>{txtok}</button>
             </div>
           {/if}
-          <!-- <Button mode="outline" on:click={close}>{txtclose}</Button> -->
-          <button class="actionbutton outline" on:click={close}>
-            {txtclose}
-          </button>
+          <button class="outline" on:click={close}>{txtclose}</button>
         </slot>
       </div>
     </footer>
