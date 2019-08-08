@@ -13,6 +13,9 @@ A message box component for `svelte`.
 // import the javascript interface
 import msgbox from "./msgbox.js";
 
+// set the theme color for all calls -> default is #999
+msgbox.setColor("#999");
+
 // ok message box
 msgbox.Ok("some message about something", "Alert");
 
