@@ -7,7 +7,35 @@
   export let show = false;
   export let color = "#999";
 
-  // $: console.log(color);
+  $: if (color !== "#999") {
+    // console.log(color);
+    document.documentElement.style.setProperty(
+      "--mb-colordark20",
+      LightenDarkenColor(color, -30)
+    );
+    document.documentElement.style.setProperty(
+      "--mb-colordark10",
+      LightenDarkenColor(color, -10)
+    );
+     document.documentElement.style.setProperty(
+      "--mb-color", color
+    );
+    document.documentElement.style.setProperty(
+      "--mb-colorlight10",
+      LightenDarkenColor(color, 10)
+    );
+    document.documentElement.style.setProperty(
+      "--mb-colorlight20",
+      LightenDarkenColor(color, 20)
+    );
+  }
+  else{
+    document.documentElement.style.setProperty("--mb-colordark20", "#666");
+    document.documentElement.style.setProperty("--mb-colordark10", "#777");
+    document.documentElement.style.setProperty("--mb-color", "#999");
+    document.documentElement.style.setProperty("--mb-colorlight10", "#ccc");
+    document.documentElement.style.setProperty("--mb-colorlight20", "#eee");
+  }
 
   let Msg = "";
   let Title = "";
@@ -29,7 +57,7 @@
   let mi = null;
 
   let minheight = 180;
-  let minwidth = 200;
+  let minwidth = 300;
 
   export function Ok(message, title) {
     Msg = message;
@@ -178,15 +206,23 @@
 </script>
 
 <style>
+  :global(:root) {
+    --mb-colordark20: #666;
+    --mb-colordark10: #777;
+    --mb-color: #999;
+    --mb-colorlight10: #ccc;
+    --mb-colorlight20: #eee;
+    --mb-colorwhite: #fff;
+  }
   .txt {
     width: 100%;
     resize: none;
     font-size: large;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--mb-colorlight10);
     border-radius: 5px;
     border-style: solid;
-    background-color: #fff;
+    background-color: var(--mb-colorwhite);
   }
   .modal-backdrop {
     position: fixed;
@@ -202,8 +238,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 20vw;
+    min-width: 30vw;
     padding: 10px;
+    /* background-color: var(--mb-colorlight20); */
     background-color: #eee;
     border-radius: 15px;
     z-index: auto;
@@ -222,7 +259,7 @@
   h1 {
     text-align: center;
     margin: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--mb-colorlight10);
     cursor: grab;
   }
 
@@ -245,7 +282,7 @@
   .resizer {
     width: 15px;
     height: 15px;
-    background-color: #777;
+    background-color: var(--mb-colordark10);
     position: absolute;
     cursor: se-resize;
     right: 0;
@@ -255,25 +292,39 @@
   .actionbutton {
     min-width: 100px;
     font-size: large;
-    background: #999;
-    background-image: linear-gradient(to bottom, #999, #666);
+    background: var(--mb-color);
+    background-image: linear-gradient(
+      to bottom,
+      var(--mb-color),
+      var(--mb-colordark20)
+    );
     border-radius: 15px;
-    color: #fff;
+    color: var(--mb-colorwhite);
     padding: 15px;
-    border: solid #ccc 1px;
+    border: solid var(--mb-colorlight10) 1px;
     margin-bottom: 5px;
   }
 
   .actionbutton:hover {
-    background-image: linear-gradient(to bottom, #ccc, #999);
+    background-image: linear-gradient(
+      to bottom,
+      var(--mb-colorlight20),
+      var(--mb-colordark20)
+    );
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   }
 
   .outline {
-    background: #fff;
-    color: #666;
+    background: var(--mb-colorwhite);
+    color: var(--mb-colordark20);
   }
   .outline:hover {
-    background-image: linear-gradient(to bottom, #fff, #ccc);
+    background-image: linear-gradient(
+      to bottom,
+      var(--mb-colorwhite),
+      var(--mb-colorlight10)
+    );
+    box-shadow: none;
   }
 </style>
 
